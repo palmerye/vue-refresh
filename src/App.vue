@@ -3,13 +3,15 @@
         <router-view></router-view>
         <tabbar>
 		    <tabbar-item link='/'>
-		    	<span slot="label">首页</span>
+		    	<i slot="icon" class="iconfont icon-home iconHome_1"></i>
+		    	<span slot="label">.</span>
 		    </tabbar-item>
-		    <tabbar-item link='/test'>
-				<span slot="label">投票</span>
+		    <tabbar-item link='/vote'>
+		    	<i slot="icon" class="iconfont icon-roundaddfill iconHome_2"></i>
 		    </tabbar-item>
-		    <tabbar-item link='/hello'>
-				<span slot="label">个人</span>
+		    <tabbar-item link='/user'>
+		    	<i slot="icon" class="iconfont icon-people iconHome_1"></i>
+				<span slot="label">.</span>
 		    </tabbar-item>
 	    </tabbar>
     </div>
@@ -27,4 +29,14 @@ export default {
 <style lang="less">
 @import '~vux/src/styles/reset.less';
 
+.iconHome_1 {
+	font-size: 30px !important;
+}
+.iconHome_2 {
+	font-size: 70px !important;
+	position: absolute;
+	left: -50%;
+	top: -50px;
+	margin-left: -50%;
+}
 </style>

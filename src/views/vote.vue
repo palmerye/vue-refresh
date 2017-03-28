@@ -1,11 +1,13 @@
 <template>
     <div>
-        <x-header :left-options="{backText: ''}">set empty back text</x-header>
-        <!-- <p>{{testData.tab}}11</p> -->
+        <p>{{testData.tab}}11</p>
+        <group>
+            <cell title="title" value="value"></cell>
+        </group>
     </div>
 </template>
 <script>
-import { XHeader } from 'vux'
+import { Group, Cell } from 'vux'
 import { mapGetters } from 'vuex'
 
 export default {
@@ -15,7 +17,8 @@ export default {
         }
     },
     components: {
-        XHeader
+        Group,
+        Cell
     },
     computed: {
         ...mapGetters({

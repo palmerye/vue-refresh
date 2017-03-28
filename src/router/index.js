@@ -3,10 +3,9 @@ import VueRouter from 'vue-router'
 // import store from '../store'
 
 import NotFoundView from '../components/404'
-import test from '../components/test'
-import hello from '../components/hello'
 import home from '../views/home'
-import article from '../views/articles'
+import vote from '../views/vote'
+import user from '../views/user'
 
 Vue.use(VueRouter)
 
@@ -19,23 +18,16 @@ const routes = [
         ]
     },
     {
-        path: '/test',
-        name: 'mytest',
-        component: test,
+        path: '/vote',
+        name: 'vote',
+        component: vote,
         children: [
         ]
     },
     {
-        path: '/hello',
-        name: 'hello',
-        component: hello,
-        children: [
-        ]
-    },
-    {
-        path: '/article',
-        name: 'article',
-        component: article,
+        path: '/user',
+        name: 'user',
+        component: user,
         children: [
         ]
     },
