@@ -6,6 +6,8 @@ import NotFoundView from '../components/404'
 import home from '../views/home'
 import vote from '../views/vote'
 import user from '../views/user'
+import login from '../views/login'
+import register from '../views/register'
 
 Vue.use(VueRouter)
 
@@ -32,6 +34,20 @@ const routes = [
         ]
     },
     {
+        path: '/login',
+        name: 'login',
+        component: login,
+        children: [
+        ]
+    },
+    {
+        path: '/register',
+        name: 'register',
+        component: register,
+        children: [
+        ]
+    },
+    {
         path: '*',
         component: NotFoundView
     }
@@ -42,6 +58,11 @@ const router = new VueRouter({
     // linkActiveClass: 'active',
     // scrollBehavior: () => ({ y: 0 }),
     routes
+})
+
+router.beforeEach((to, from, next) => {
+    console.log('111')
+    next()
 })
 
 export default router

@@ -34,9 +34,10 @@ export default {
 }
 .iconHome_2 {
 	font-size: 70px !important;
+	text-shadow: 0px 0px 3px #666;
 	position: absolute;
 	left: -50%;
-	top: -50px;
+	top: -40px;
 	margin-left: -50%;
 }
 </style>
