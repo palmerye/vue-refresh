@@ -10,6 +10,10 @@ import { sync } from 'vuex-router-sync'
 import FastClick from 'fastclick'
 import router from './router'
 
+import VueResource from 'vue-resource'
+// 安装Resource模块
+Vue.use(VueResource)
+
 // sync the router with the vuex store.
 // this registers `store.state.route`
 sync(store, router)

@@ -14,9 +14,10 @@ const getters = {
 
 // actions
 const actions = {
-    login ({ commit, params }) {
-        loginApi({ params })
+    login ({ commit }, params) {
+        loginApi(params)
             .then(res => {
+                console.log(res.data)
                 commit(types.LOGIN_SUCCESS, res.data)
             })
             .catch(err => {
@@ -39,11 +40,12 @@ const actions = {
 
 // mutations
 const mutations = {
-    [types.LOGIN_SUCCESS] (state, { data }) {
+    [types.LOGIN_SUCCESS] (state, data) {
         state.userInfo = data
         console.log(state.userInfo)
+        window.sessionStorage.setItem('token', JSON.stringify(state.userInfo.token))
     },
-    [types.REGISTER_SUCCESS] (state, { data }) {
+    [types.REGISTER_SUCCESS] (state, data) {
         state.userInfo = data
         console.log(state.userInfo)
     }
