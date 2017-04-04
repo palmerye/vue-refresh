@@ -36,15 +36,20 @@ export default {
     },
     computed: {
         ...mapGetters({
-            testData: 'testDataGet'
+            // testData: 'testDataGet'
         })
     },
     mounted () {
-        this.$store.dispatch('gettestData')
+        // this.$store.dispatch('gettestData')
     },
     methods: {
         login () {
             this.$store.dispatch('login', this.params)
+            .then(result => {
+                setTimeout(() => {
+                    this.$router.push({name: 'user'})
+                }, 1000)
+            })
         }
     }
 }

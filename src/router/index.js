@@ -4,7 +4,10 @@ import VueRouter from 'vue-router'
 
 import NotFoundView from '../components/404'
 import home from '../views/home'
+import classifyhome from '../views/classify'
+import classify from '../views/classifyDetail'
 import vote from '../views/vote'
+import votedetail from '../views/voteDetail'
 import user from '../views/user'
 import login from '../views/login'
 import register from '../views/register'
@@ -16,6 +19,21 @@ const routes = [
         path: '/',
         name: 'home',
         component: home,
+        // redirect: '/login',
+        children: [
+        ]
+    },
+    {
+        path: '/classifyhome',
+        name: 'classifyhome',
+        component: classifyhome,
+        children: [
+        ]
+    },
+    {
+        path: '/classify/:id',
+        name: 'classify',
+        component: classify,
         children: [
         ]
     },
@@ -23,6 +41,13 @@ const routes = [
         path: '/vote',
         name: 'vote',
         component: vote,
+        children: [
+        ]
+    },
+    {
+        path: '/votedetail/:id',
+        name: 'votedetail',
+        component: votedetail,
         children: [
         ]
     },
@@ -61,7 +86,10 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    console.log('111')
+    // console.log(window.sessionStorage.getItem('token'))
+    // if (!window.sessionStorage.getItem('token')) {
+    //     return to('/login')
+    // }
     next()
 })
 

@@ -5,6 +5,7 @@ import * as getters from './getters'
 import * as mutations from './mutations'
 import test from './modules/test.js'
 import user from './modules/user.js'
+import vote from './modules/vote.js'
 
 Vue.use(Vuex)
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
     mutations,
     modules: {
         test,
-        user
+        user,
+        vote
     },
     strict: debug
 })

@@ -14,6 +14,9 @@ import VueResource from 'vue-resource'
 // 安装Resource模块
 Vue.use(VueResource)
 
+import { ToastPlugin } from 'vux'
+Vue.use(ToastPlugin)
+
 // sync the router with the vuex store.
 // this registers `store.state.route`
 sync(store, router)
