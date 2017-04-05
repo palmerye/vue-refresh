@@ -36,15 +36,21 @@ export default {
     mounted () {
         switch (this.$route.params.id) {
             case 1:
-                this.classify_tag = '政治'
+                this.classify_tag = '娱乐'
                 break
             case 2:
-                this.classify_tag = '科技'
+                this.classify_tag = '学习'
                 break
             case 3:
-                this.classify_tag = '生活'
+                this.classify_tag = '影视'
                 break
             case 4:
+                this.classify_tag = '社会'
+                break
+            case 5:
+                this.classify_tag = '军事'
+                break
+            case 6:
                 this.classify_tag = '其他'
                 break
         }
