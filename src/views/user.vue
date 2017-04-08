@@ -1,6 +1,11 @@
 <template>
     <div>
         <x-header :left-options="{backText: ''}">个人中心 <i class="iconfont icon-add add_tag" @click="show_pop = true"></i></x-header>
+        <div class="avatarDiv">
+            <blur :blur-amount=40 :height=150 :url="AvatarUrl">
+                <p class="center"><img :src="AvatarUrl"></p>
+            </blur>
+        </div>
         <divider>我感兴趣的标签</divider>
         <div class="my_int">
             <span v-for="item in userInfo.data.interested.split(',')">
@@ -45,8 +50,9 @@
     </div>
 </template>
 <script>
-import { Tab, TabItem, XHeader, Divider, Swiper, SwiperItem, Popup, XButton, Checklist } from 'vux'
+import { Tab, TabItem, XHeader, Divider, Swiper, SwiperItem, Popup, XButton, Checklist, Blur } from 'vux'
 import { mapState } from 'vuex'
+import AvatarUrl from '../assets/imgages/avatar.jpg'
 
 export default {
     data () {
@@ -130,7 +136,8 @@ export default {
                 title: 't23',
                 desc: '描述描述描述描述描述描述描述描述',
                 id: 1
-            }]
+            }],
+            AvatarUrl
         }
     },
     components: {
@@ -142,7 +149,8 @@ export default {
         SwiperItem,
         Popup,
         XButton,
-        Checklist
+        Checklist,
+        Blur
     },
     computed: {
         ...mapState({
@@ -210,5 +218,19 @@ export default {
     margin-top: 10px;
     background-color: #fff;
     border: 0;
+}
+.avatarDiv {
+    .center {
+        text-align: center;
+        padding-top: 20px;
+        color: #fff;
+        font-size: 18px;
+        img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid #ececec;
+        }
+    }
 }
 </style>
