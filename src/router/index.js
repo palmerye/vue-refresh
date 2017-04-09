@@ -86,9 +86,12 @@ const router = new VueRouter({
 })
 
 router.beforeEach((to, from, next) => {
-    // console.log(window.sessionStorage.getItem('token'))
-    // if (!window.sessionStorage.getItem('token')) {
-    //     return to('/login')
+    // console.log(store.state.user.authlock)
+    // if (store.state.user.authlock) {
+    //     next({
+    //         path: '/user'
+    //     })
+    //     return
     // }
     next()
 })

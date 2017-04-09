@@ -12,7 +12,7 @@
                 <p>{{item.voteDescribe}}</p>
                 <p>
                     <span>PV: {{item.pv}}</span>
-                    <span v-if="item.isEnd">进行中</span>
+                    <span v-if="!item.isEnd">进行中</span>
                     <span v-else>已结束</span>
                 </p>
             </div>

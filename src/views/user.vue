@@ -9,10 +9,12 @@
         <divider>我感兴趣的标签</divider>
         <div class="my_int">
             <span v-for="item in userInfo.data.interested.split(',')">
-                <span v-if="item == 1">政治</span>
-                <span v-if="item == 2">科技</span>
-                <span v-if="item == 3">生活</span>
-                <span v-if="item == 4">其他</span>
+                <span v-if="item == 1">娱乐</span>
+                <span v-if="item == 2">学习</span>
+                <span v-if="item == 3">影视</span>
+                <span v-if="item == 4">社会</span>
+                <span v-if="item == 5">军事</span>
+                <span v-if="item == 6">其他</span>
             </span>
         </div>
         <tab :line-width=2 active-color='#35495e' v-model="index">
@@ -60,15 +62,21 @@ export default {
             show_pop: false,
             tagList: [{
                 key: '1',
-                value: '政治'
+                value: '娱乐'
             }, {
                 key: '2',
-                value: '科技'
+                value: '学习'
             }, {
                 key: '3',
-                value: '生活'
+                value: '影视'
             }, {
                 key: '4',
+                value: '社会'
+            }, {
+                key: '5',
+                value: '军事'
+            }, {
+                key: '6',
                 value: '其他'
             }],
             sel_tag: [],
@@ -137,6 +145,7 @@ export default {
                 desc: '描述描述描述描述描述描述描述描述',
                 id: 1
             }],
+            myinterested: []
             AvatarUrl
         }
     },

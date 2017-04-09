@@ -49,18 +49,24 @@ export default {
             newTodo: '',
             typeList: [{
                 key: '1',
-                value: '分类1'
+                value: '娱乐'
             }, {
                 key: '2',
-                value: '分类2'
+                value: '学习'
             }, {
                 key: '3',
-                value: '分类3'
+                value: '影视'
             }, {
                 key: '4',
-                value: '分类4'
+                value: '社会'
+            }, {
+                key: '5',
+                value: '军事'
+            }, {
+                key: '6',
+                value: '其他'
             }],
-            type_sel: {key: '1', value: '分类1'},
+            type_sel: {key: '1', value: '娱乐'},
             endTimeList: [{
                 key: '1',
                 value: '1天'

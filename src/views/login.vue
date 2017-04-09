@@ -45,11 +45,13 @@ export default {
     methods: {
         login () {
             this.$store.dispatch('login', this.params)
-            .then(result => {
-                setTimeout(() => {
-                    this.$router.push({name: 'user'})
-                }, 1000)
-            })
+            // .then(result => {
+            //     // this.$router.push({name: 'user'})
+            //     console.log('succ')
+            // })
+            // .catch(erro => {
+            //     console.log(erro, 'errrr')
+            // })
         }
     }
 }

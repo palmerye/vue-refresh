@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { loginApi, registerApi, addTagApi, getUserInfoApi } from '../../api'
 import * as types from '../mutation-types'
+import router from '../../router'
 
 const state = {
     userInfo: {},
@@ -22,8 +23,10 @@ const actions = {
                 console.log(res.data)
                 commit(types.LOGIN_SUCCESS, res.data)
                 Vue.$vux.toast.show({
-                    text: '登录成功'
+                    text: '登录成功',
+                    type: 'default'
                 })
+                router.push({name: 'user'})
             })
             .catch(err => {
                 console.log(err)
