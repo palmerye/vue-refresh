@@ -32,7 +32,8 @@ export default {
             menus1: {
                 '热门': '热门',
                 '我感兴趣的': '我感兴趣的'
-            }
+            },
+            lists: []
         }
     },
     components: {
@@ -41,12 +42,15 @@ export default {
     },
     computed: {
         ...mapState({
-            lists: state => state.vote.hotVoteinfo,
+            hotVoteinfo: state => state.vote.hotVoteinfo,
             interestVoteinfo: state => state.vote.interestVoteinfo
         })
     },
     mounted () {
         this.$store.dispatch('gethotVote')
+        setTimeout(() => {
+            this.lists = this.hotVoteinfo
+        }, 1000)
         // this.$store.dispatch('getinterestVote')
     },
     methods: {
@@ -54,10 +58,14 @@ export default {
             this.tag_sec = key
             if (key === '热门') {
                 this.$store.dispatch('gethotVote')
-                this.lists = this.$store.state.vote.hotVoteinfo
+                this.lists = this.hotVoteinfo
+                console.log(this.$store.state.vote.hotVoteinfo)
+                console.log(this.lists)
             } else {
                 this.$store.dispatch('getinterestVote')
                 this.lists = this.interestVoteinfo
+                console.log(this.interestVoteinfo)
+                console.log(this.lists)
             }
         }
     }

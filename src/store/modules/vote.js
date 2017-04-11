@@ -120,10 +120,11 @@ const actions = {
 const mutations = {
     [types.GETHOTVOTE_SUCCESS] (state, data) {
         state.hotVoteinfo = data.data
+        console.log(data.data, '热门')
     },
     [types.GETINTERESTED_SUCCESS] (state, data) {
         state.interestVoteinfo = data.data
-        console.log(data.data)
+        console.log(data.data, '感兴趣')
     },
     [types.GETCLASSIFYVOTE_SUCCESS] (state, data) {
         state.classifyVoteinfo = data.data

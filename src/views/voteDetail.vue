@@ -8,7 +8,7 @@
                 <p class="desc">{{votedetail.data.voteDescribe}}</p>
                 <div class="state">
                     <span>PV:{{votedetail.data.pv}}</span>
-                    <span v-if="!votedetail.data.isend">进行中</span>
+                    <span v-if="!votedetail.data.isEnd">进行中</span>
                     <span v-else>已结束</span>
                 </div>
                 <p class="tag" v-if="votedetail.data.typeId == 1">分类标签：娱乐</p>

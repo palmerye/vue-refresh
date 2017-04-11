@@ -145,7 +145,7 @@ export default {
                 desc: '描述描述描述描述描述描述描述描述',
                 id: 1
             }],
-            myinterested: []
+            myinterested: [],
             AvatarUrl
         }
     },
