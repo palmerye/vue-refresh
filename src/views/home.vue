@@ -1,27 +1,10 @@
 <template>
     <div>
-        <x-header :left-options="{backText: ''}">
-            <span @click="show_sec = true">{{tag_sec}} <i class="iconfont icon-triangledownfill"></i></span>
-            <router-link class="fl_entry" to='classifyhome'>分类</router-link>
-        </x-header>
-        <!-- <div class="vote-list" v-for="item in lists" v-link="{ name: 'votedetail', params: { id: item.id } }"> -->
-        <div class="vote-list" v-for="item in lists" @click="$router.push({ name: 'votedetail', params: { id: item.id } })">
-            <img :src="'//' + item.photoUrl">
-            <div class="content">
-                <p>{{item.title}}</p>
-                <p>{{item.voteDescribe}}</p>
-                <p>
-                    <span>PV: {{item.pv}}</span>
-                    <span v-if="!item.isEnd">进行中</span>
-                    <span v-else>已结束</span>
-                </p>
-            </div>
-        </div>
-        <actionsheet v-model="show_sec" :menus="menus1" @on-click-menu="click"></actionsheet>
+        <search></search>
     </div>
 </template>
 <script>
-import { XHeader, Actionsheet } from 'vux'
+import { Group, Search } from 'vux'
 import { mapState } from 'vuex'
 
 export default {
@@ -37,8 +20,8 @@ export default {
         }
     },
     components: {
-        XHeader,
-        Actionsheet
+        Group,
+        Search
     },
     computed: {
         ...mapState({

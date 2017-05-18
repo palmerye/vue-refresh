@@ -58,6 +58,12 @@ export default {
 	margin-left: -50%;
 }
 .content_all {
-	padding-bottom: 100px;
+	padding: 30px;
+}
+@media screen and (min-width: 450px) {
+    .content_all {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
 }
 </style>
