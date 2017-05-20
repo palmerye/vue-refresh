@@ -1,6 +1,5 @@
 <template>
     <div>
-        <x-header :left-options="{showBack: false}">登录</x-header>
         <group>
             <x-input placeholder="输入用户名..." v-model="params.username">
                 <i slot="label" class="iconfont icon-people"></i>
@@ -10,9 +9,6 @@
             </x-input>
         </group>
         <x-button plain type="primary" class="login_btn" @click.native="login">登录</x-button>
-        <div class="toregister">
-            <router-link to="register">未注册?点这里注册</router-link>
-        </div>
     </div>
 </template>
 <script>
