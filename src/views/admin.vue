@@ -1,6 +1,12 @@
 <template>
     <div>
         <divider>管理员中心</divider>
+        <div class="user-list">
+            <div v-for="item in items" class="user-item">
+                <p>{{item.title}}</p>
+                <img :src="item.imgUrl">
+            </div>
+        </div>
         <div class="video-list">
             <div v-for="item in items" class="video-item">
                 <p>{{item.title}}</p>
