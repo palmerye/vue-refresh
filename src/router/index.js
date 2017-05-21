@@ -9,6 +9,7 @@ import classify from '../views/classifyDetail'
 import vote from '../views/vote'
 import votedetail from '../views/voteDetail'
 import user from '../views/user'
+import admin from '../views/admin'
 import login from '../views/login'
 import register from '../views/register'
 
@@ -55,6 +56,13 @@ const routes = [
         path: '/user',
         name: 'user',
         component: user,
+        children: [
+        ]
+    },
+    {
+        path: '/admin',
+        name: 'admin',
+        component: admin,
         children: [
         ]
     },
