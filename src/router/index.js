@@ -7,7 +7,7 @@ import home from '../views/home'
 import classifyhome from '../views/classify'
 import classify from '../views/classifyDetail'
 import vote from '../views/vote'
-import votedetail from '../views/voteDetail'
+import videodetail from '../views/videoDetail'
 import user from '../views/user'
 import admin from '../views/admin'
 import login from '../views/login'
@@ -46,9 +46,9 @@ const routes = [
         ]
     },
     {
-        path: '/votedetail/:id',
-        name: 'votedetail',
-        component: votedetail,
+        path: '/videodetail/:id',
+        name: 'videodetail',
+        component: videodetail,
         children: [
         ]
     },

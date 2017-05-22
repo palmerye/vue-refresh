@@ -3,7 +3,7 @@
         <divider>我的收藏</divider>
         <div class="video-list">
             <div v-for="item in items" class="video-item">
-                <p>{{item.title}}</p>
+                <router-link :to="{ name: 'videodetail', params: { id: item.id }}" class="title" tag="p">{{item.title}}</router-link>
                 <img :src="item.imgUrl">
             </div>
         </div>
@@ -20,18 +20,22 @@ export default {
             items: [
                 {
                     title: '视频标题',
+                    id: 1,
                     imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
                 },
                 {
                     title: '视频标题',
+                    id: 2,
                     imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
                 },
                 {
                     title: '视频标题',
+                    id: 1,
                     imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
                 },
                 {
                     title: '视频标题',
+                    id: 1,
                     imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
                 }
             ]

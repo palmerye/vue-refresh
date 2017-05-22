@@ -3,7 +3,7 @@
         <search @on-submit="onSubmit" :auto-fixed="false" v-model="value2" @on-focus="onFocus" @on-cancel="onCancel"></search>
         <div class="video-list">
             <div v-for="item in items" class="video-item">
-                <p>{{item.title}}</p>
+                <router-link :to="{ name: 'videodetail', params: { id: item.id }}" class="title" tag="p">{{item.title}}</router-link>
                 <img :src="item.imgUrl">
             </div>
         </div>
@@ -19,18 +19,22 @@ export default {
             items: [
                 {
                     title: '视频标题',
+                    id: 1,
                     imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
                 },
                 {
                     title: '视频标题',
+                    id: 2,
                     imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
                 },
                 {
                     title: '视频标题',
+                    id: 3,
                     imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
                 },
                 {
                     title: '视频标题',
+                    id: 3,
                     imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
                 }
             ]
@@ -74,12 +78,16 @@ export default {
 <style lang='scss' scoped>
 .video-list {
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-wrap: wrap;
     margin: 0 auto;
     .video-item {
         width: 220px;
         padding: 15px;
-        p {
+        margin: 5px;
+        border-bottom: 1px solid #e1e1e1;
+        .title {
             text-align: center;
         }
         img {
