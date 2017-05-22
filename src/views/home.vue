@@ -1,6 +1,12 @@
 <template>
     <div>
-        <search></search>
+        <search @on-submit="onSubmit" :auto-fixed="false" v-model="value2" @on-focus="onFocus" @on-cancel="onCancel"></search>
+        <div class="video-list">
+            <div v-for="item in items" class="video-item">
+                <router-link :to="{ name: 'videodetail', params: { id: item.id }}" class="title" tag="p">{{item.title}}</router-link>
+                <img :src="item.imgUrl">
+            </div>
+        </div>
     </div>
 </template>
 <script>
@@ -10,13 +16,28 @@ import { mapState } from 'vuex'
 export default {
     data () {
         return {
-            tag_sec: '热门',
-            show_sec: false,
-            menus1: {
-                '热门': '热门',
-                '我感兴趣的': '我感兴趣的'
-            },
-            lists: []
+            items: [
+                {
+                    title: '视频标题',
+                    id: 1,
+                    imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
+                },
+                {
+                    title: '视频标题',
+                    id: 2,
+                    imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
+                },
+                {
+                    title: '视频标题',
+                    id: 3,
+                    imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
+                },
+                {
+                    title: '视频标题',
+                    id: 3,
+                    imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
+                }
+            ]
         }
     },
     components: {
@@ -55,35 +76,22 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
-.fl_entry {
-    position: absolute;
-    right: 10px;
-    font-size: 12px;
-    color: #fff;
-}
-.vote-list {
+.video-list {
     display: flex;
     align-items: center;
-    margin: 10px;
-    padding: 5px;
-    border: 1px solid #ccc;
-    img {
-        width: 100px;
-        height: 80px;
-        margin-right: 10px;
-    }
-    .content {
-        p:nth-child(1) {
-            font-size: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    .video-item {
+        width: 220px;
+        padding: 15px;
+        margin: 5px;
+        border-bottom: 1px solid #e1e1e1;
+        .title {
+            text-align: center;
         }
-        p:nth-child(2) {
-            font-size: 12px;
-            line-height: 14px;
-        }
-        p:nth-child(3) {
-            font-size: 12px;
-            display: flex;
-            justify-content: space-between;
+        img {
+            width: 100%;
         }
     }
 }
