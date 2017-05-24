@@ -2,10 +2,11 @@
     <div>
         <divider>视频详情</divider>
         <div class="videoDetail">
-            <h2 class="title">{{title}}</h2>
-            <video :src="videoUrl" class="video"></video>
-            <x-button plain>收藏</x-button>
+            <h2 class="title">{{detailVideo.name}}</h2>
+            <video :src="detailVideo.videoUrl" class="video" controls="controls" autoplay></video>
+            <x-button plain @click.native="collect(detailVideo.vid)">收藏</x-button>
         </div>
+        <router-link :to="{ name: 'home'}" style="text-align: center;color: #e1e1e1;cursor: pointer" tag="p">Back To Home</router-link>
     </div>
 </template>
 <script>
@@ -15,9 +16,6 @@ import { mapState } from 'vuex'
 export default {
     data () {
         return {
-            show_pop: false,
-            title: '视频标题呀',
-            videoUrl: 'http://ohce3yxd6.bkt.clouddn.com/media/cat.mp4'
         }
     },
     components: {
@@ -26,31 +24,21 @@ export default {
     },
     computed: {
         ...mapState({
-            userInfo: state => state.user.userInfo,
-            myjoinVote: state => state.vote.myjoinVoteinfo,
-            mypublishVote: state => state.vote.mypublishVoteinfo
+            authlock: state => state.user.authlock,
+            detailVideo: state => state.video.detailVideo
         })
     },
     mounted () {
-        this.$store.dispatch('getUserInfo')
-        this.$store.dispatch('myjoinVote')
-        this.$store.dispatch('mypublishVote')
+        this.$store.dispatch('getDetailVideo', this.$route.params.id)
     },
     methods: {
-        change (val) {
-        },
-        addTag () {
-            this.$store.dispatch('addTag', {
-                interested: this.sel_tag.toString()
-            })
-            .then(result => {
-                this.show_pop = false
-            })
-        }
-    },
-    watch: {
-        show_pop () {
-            this.$store.dispatch('getUserInfo')
+        collect (id) {
+            if (this.authlock) {
+                console.log('已经登录')
+            } else {
+                console.log('未登录')
+                this.$router.push({name: 'login'})
+            }
         }
     }
 }

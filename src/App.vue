@@ -1,21 +1,6 @@
 <template>
     <div class="content_all">
         <router-view></router-view>
-        <div v-show="authlock">
-        	<tabbar style="position: fixed;">
-			    <tabbar-item link='/'>
-			    	<i slot="icon" class="iconfont icon-home iconHome_1"></i>
-			    	<span slot="label">.</span>
-			    </tabbar-item>
-			    <tabbar-item link='/vote'>
-			    	<i slot="icon" class="iconfont icon-roundaddfill iconHome_2"></i>
-			    </tabbar-item>
-			    <tabbar-item link='/user'>
-			    	<i slot="icon" class="iconfont icon-people iconHome_1"></i>
-					<span slot="label">.</span>
-			    </tabbar-item>
-		    </tabbar>
-        </div>
     </div>
 </template>
 <script>
@@ -29,10 +14,11 @@ export default {
     },
     computed: {
         ...mapState({
-            authlock: state => state.user.authlock
+            // authlock: state => state.user.authlock
         })
     },
     mounted () {
+        this.$store.dispatch('getallVideo')
     },
     watch: {
         // authlock (val) {

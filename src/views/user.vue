@@ -7,6 +7,7 @@
                 <img :src="item.imgUrl">
             </div>
         </div>
+        <router-link :to="{ name: 'home'}" style="text-align: center" tag="p">回到首页</router-link>
     </div>
 </template>
 <script>

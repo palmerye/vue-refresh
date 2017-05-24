@@ -27,7 +27,7 @@
 
 import Vue from 'vue'
 import VueResource from 'vue-resource'
-// import store from '../store'
+import store from '../store'
 
 Vue.use(VueResource)
 
@@ -36,20 +36,19 @@ Vue.http.options.crossOrigin = true
 Vue.http.options.emulateHTTP = true
 Vue.http.interceptors.push((request, next) => {
     // request.headers.Authorization = '8e2O6mcBlL2TDF9I/nGryQ=='
-    const accessToken = window.sessionStorage.getItem('token')
-    request.headers.set('Authorization', accessToken)
-    console.log(request.headers)
-    // const auth = store.state.user.userInfo
-    // console.log(auth)
-    // if (auth) {
-    //     const accessToken = window.sessionStorage.getItem('token')
-    //     console.log(accessToken, 'token')
-    //     Vue.http.headers.Authorization = accessToken
-    //     Vue.http.headers.common.Authorization = 'ERR15zAv0B1PA64RfD9BTA=='
-    //     console.log(Vue.http.headers)
-    // } else {
-    //     // delete Vue.http.headers.Authorization
-    // }
+    // const accessToken = window.sessionStorage.getItem('token')
+    // request.headers.set('Authorization', accessToken)
+    // console.log(request.headers)
+    const auth = store.state.user.userInfo
+    console.log(auth)
+    if (auth) {
+        const accessToken = window.sessionStorage.getItem('token')
+        console.log(accessToken, 'token')
+        Vue.http.headers.Authorization = accessToken
+        console.log(Vue.http.headers)
+    } else {
+        delete Vue.http.headers.Authorization
+    }
   // if (auth.check()) {
   //   const accessToken = auth.jwt_token.access_token;
   //   Vue.http.headers.common.Authorization = `Bearer ${accessToken}`;
@@ -65,7 +64,7 @@ export const testApi = () => {
 
 // 用户相关
 export const loginApi = (params) => {
-    return Vue.http.post('http://7le.online/user/login', params)
+    return Vue.http.post('http://7le.online/login', params)
 }
 export const registerApi = (params) => {
     return Vue.http.post('http://7le.online/user/register', params)
@@ -87,9 +86,12 @@ export const myinterestedApi = () => {
     return Vue.http.get('http://7le.online/vote/interested/list')
 }
 
-// 投票相关
-export const hotVoteApi = () => {
-    return Vue.http.get('http://7le.online/vote/list/0')
+// 视频相关
+export const allVideoApi = () => {
+    return Vue.http.get('http://7le.online/video?pageNo=1&pageSize=999')
+}
+export const detailVideoApi = (id) => {
+    return Vue.http.get('http://7le.online/video/show/' + id)
 }
 export const classifyVoteApi = (id) => {
     return Vue.http.get('http://7le.online/vote/list/' + id)
