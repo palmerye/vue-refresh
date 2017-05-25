@@ -67,23 +67,13 @@ export const loginApi = (params) => {
     return Vue.http.post('http://7le.online/login', params)
 }
 export const registerApi = (params) => {
-    return Vue.http.post('http://7le.online/user/register', params)
+    return Vue.http.post('http://7le.online/register', params)
 }
-export const getUserInfoApi = () => {
-    return Vue.http.get('http://7le.online/vote/user/info')
+export const allUserApi = () => {
+    return Vue.http.get('http://7le.online/user')
 }
-export const addTagApi = (params) => {
-    return Vue.http.post('http://7le.online/vote/interested/add', params)
-}
-
-export const myjoinVoteApi = () => {
-    return Vue.http.get('http://7le.online/vote/list/join')
-}
-export const mypublishVoteApi = () => {
-    return Vue.http.get('http://7le.online/vote/list/publish')
-}
-export const myinterestedApi = () => {
-    return Vue.http.get('http://7le.online/vote/interested/list')
+export const deleteUserApi = (id) => {
+    return Vue.http.delete('http://7le.online/user/' + id)
 }
 
 // 视频相关
@@ -93,15 +83,20 @@ export const allVideoApi = () => {
 export const detailVideoApi = (id) => {
     return Vue.http.get('http://7le.online/video/show/' + id)
 }
-export const classifyVoteApi = (id) => {
-    return Vue.http.get('http://7le.online/vote/list/' + id)
+// 视频收藏
+export const collectVideoApi = () => {
+    return Vue.http.get('http://7le.online/collect?pageNo=1&pageSize=999')
 }
-export const publishApi = (params) => {
-    return Vue.http.post('http://7le.online/vote/publish', params)
+export const deleteCollectVideoApi = (id) => {
+    return Vue.http.delete('http://7le.online/collect/' + id)
 }
-export const voteDetailApi = (id) => {
-    return Vue.http.get('http://7le.online/vote/show/' + id)
+export const toCollectVideoApi = (id) => {
+    return Vue.http.post('http://7le.online/collect/' + id)
 }
-export const postVodeApi = (params) => {
-    return Vue.http.post('http://7le.online/vote/join', params)
+// 视频上传
+export const uploadVideoApi = (file) => {
+    return Vue.http.post('http://7le.online/video/upload', file)
+}
+export const deleteVideoApi = (id) => {
+    return Vue.http.delete('http://7le.online/video/' + id)
 }

@@ -1,10 +1,11 @@
 import Vue from 'vue'
-import { loginApi, registerApi, addTagApi, getUserInfoApi } from '../../api'
+import { loginApi, registerApi, allUserApi, deleteUserApi } from '../../api'
 import * as types from '../mutation-types'
 import router from '../../router'
 
 const state = {
     userInfo: {},
+    allUser: [],
     authlock: false
 }
 
@@ -42,7 +43,7 @@ const actions = {
                 console.log(res.data)
                 commit(types.REGISTER_SUCCESS, res.data)
                 Vue.$vux.toast.show({
-                    text: '注册成功，请登录'
+                    text: '注册成功'
                 })
             })
             .catch(err => {
@@ -53,31 +54,31 @@ const actions = {
                 })
             })
     },
-    addTag ({ commit }, params) {
-        addTagApi(params)
+    getAllUser ({ commit }) {
+        allUserApi()
             .then(res => {
                 console.log(res.data)
-                commit(types.ADDTAG_SUCCESS, res.data)
-                Vue.$vux.toast.show({
-                    text: '添加成功'
-                })
+                commit(types.GETALLUSER_SUCCESS, res.data)
             })
             .catch(err => {
                 console.log(err)
-                Vue.$vux.toast.show({
-                    text: '添加失败',
-                    type: 'warn'
-                })
             })
     },
-    getUserInfo ({ commit }) {
-        getUserInfoApi()
+    deleteUser ({ commit }, id) {
+        deleteUserApi(id)
             .then(res => {
                 console.log(res.data)
-                commit(types.GETUSERINFO_SUCCESS, res.data)
+                Vue.$vux.toast.show({
+                    text: '删除用户成功',
+                    type: 'default'
+                })
             })
             .catch(err => {
                 console.log(err)
+                Vue.$vux.toast.show({
+                    text: '删除用户失败',
+                    type: 'warn'
+                })
             })
     }
 }
@@ -96,12 +97,9 @@ const mutations = {
         state.userInfo = data
         console.log(state.userInfo)
     },
-    [types.ADDTAG_SUCCESS] (state, data) {
-        console.log(state.userInfo)
-    },
-    [types.GETUSERINFO_SUCCESS] (state, data) {
-        state.userInfo = data
-        console.log(state.userInfo)
+    [types.GETALLUSER_SUCCESS] (state, data) {
+        state.allUser = data
+        console.log(state.allUser)
     }
 }
 
