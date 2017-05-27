@@ -1,5 +1,9 @@
 <template>
     <div class="content_all">
+        <p class="header">
+            <router-link to="/" tag="span">Home</router-link>
+            <span @click="toJump()">个人中心</span>
+        </p>
         <router-view></router-view>
     </div>
 </template>
@@ -18,7 +22,7 @@ export default {
         })
     },
     mounted () {
-        this.$store.dispatch('getallVideo')
+        this.$store.dispatch('getallVideo', '')
     },
     watch: {
         // authlock (val) {
@@ -26,6 +30,15 @@ export default {
         //         // this.$router.push({name: 'user'})
         //     }
         // }
+    },
+    methods: {
+        toJump () {
+            if (this.$store.state.user.userInfo.type) {
+                this.$router.push({name: 'admin'})
+            } else {
+                this.$router.push({name: 'user'})
+            }
+        }
     }
 }
 </script>
@@ -45,6 +58,12 @@ export default {
 }
 .content_all {
 	padding: 30px;
+}
+.header {
+    display: flex;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    color: #666;
 }
 @media screen and (min-width: 450px) {
     .content_all {

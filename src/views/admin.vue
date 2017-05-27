@@ -2,26 +2,24 @@
     <div>
         <divider>用户列表</divider>
         <div class="user-list">
-            <div v-for="item in itemsUser" class="user-item">
-                <p>{{item.username}}<x-button type="warn" mini plain class="delete" @click.native="del_op">删除用户</x-button></p>
+            <div v-for="item in allUser" class="user-item">
+                <p><span>用户名： {{item.username}}</span><span>密码： {{item.password}}</span><x-button type="warn" mini plain class="delete" @click.native="del_op(item.uid)">删除用户</x-button></p>
             </div>
             <divider>添加用户</divider>
             <group>
                 <x-input title="用户名" v-model="username"></x-input>
                 <x-input title="密码" v-model="password"></x-input>
             </group>
-            <group>
-                <x-input :title="'选项' + [index+1]" v-model="voteOption[index]" v-for="(item, index) in voteList"></x-input>
-            </group>
             <div class="vote_btn">
-                <x-button type="default" mini plain class="btn_add" @click.native="add_op">添加选项</x-button>
+                <x-button type="default" mini plain class="btn_add" @click.native="add_op">添加用户</x-button>
             </div>
         </div>
         <divider>视频列表</divider>
         <div class="video-list">
-            <div v-for="item in items" class="video-item">
-                <router-link :to="{ name: 'videodetail', params: { id: item.id }}" class="title" tag="p">{{item.title}}</router-link>
-                <img :src="item.imgUrl">
+            <div v-for="item in allCollectVideo" class="video-item">
+                <router-link :to="{ name: 'videodetail', params: { id: item.video.vid }}" class="title" tag="p">{{item.video.name}}</router-link>
+                <img :src="item.video.photoUrl">
+                <x-button type="warn" mini plain class="delete" @click.native="del_col(item.video.vid)">删除收藏视频</x-button>
             </div>
         </div>
         <divider>上传视频</divider>
@@ -34,51 +32,8 @@ import { mapState } from 'vuex'
 export default {
     data () {
         return {
-            show_pop: false,
-            items: [
-                {
-                    title: '视频标题',
-                    id: 1,
-                    imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
-                },
-                {
-                    title: '视频标题',
-                    id: 1,
-                    imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
-                },
-                {
-                    title: '视频标题',
-                    id: 1,
-                    imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
-                },
-                {
-                    title: '视频标题',
-                    id: 1,
-                    imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
-                }
-            ],
-            itemsUser: [
-                {
-                    username: '啊三',
-                    password: '123456',
-                    id: 1
-                },
-                {
-                    username: '啊三',
-                    password: '123456',
-                    id: 2
-                },
-                {
-                    username: '啊三',
-                    password: '123456',
-                    id: 3
-                },
-                {
-                    username: '啊三',
-                    password: '123456',
-                    id: 4
-                }
-            ]
+            username: '',
+            password: ''
         }
     },
     components: {
@@ -89,32 +44,50 @@ export default {
     },
     computed: {
         ...mapState({
-            userInfo: state => state.user.userInfo,
-            myjoinVote: state => state.vote.myjoinVoteinfo,
-            mypublishVote: state => state.vote.mypublishVoteinfo
+            allUser: state => state.user.allUser,
+            allCollectVideo: state => state.video.allCollectVideo
         })
     },
     mounted () {
-        this.$store.dispatch('getUserInfo')
-        this.$store.dispatch('myjoinVote')
-        this.$store.dispatch('mypublishVote')
+        this.$store.dispatch('getAllUser')
+        this.$store.dispatch('getallCollectVideo')
     },
     methods: {
-        change (val) {
-        },
-        addTag () {
-            this.$store.dispatch('addTag', {
-                interested: this.sel_tag.toString()
+        add_op () {
+            this.$store.dispatch('register', {
+                username: this.username,
+                password: this.password
             })
             .then(result => {
-                this.show_pop = false
+                setTimeout(() => {
+                    this.$store.dispatch('getAllUser')
+                }, 500)
+                this.allUser = this.$store.state.user.allUser
+            })
+        },
+        del_op (id) {
+            this.$store.dispatch('deleteUser', id)
+            .then(result => {
+                setTimeout(() => {
+                    this.$store.dispatch('getAllUser')
+                }, 500)
+                this.allUser = this.$store.state.user.allUser
+            })
+        },
+        del_col (id) {
+            this.$store.dispatch('deleteCollectVideo', id)
+            .then(result => {
+                setTimeout(() => {
+                    this.$store.dispatch('getallCollectVideo')
+                }, 500)
+                this.allCollectVideo = this.$store.state.video.allCollectVideo
             })
         }
     },
     watch: {
-        show_pop () {
-            this.$store.dispatch('getUserInfo')
-        }
+        // show_pop () {
+        //     this.$store.dispatch('getUserInfo')
+        // }
     }
 }
 </script>

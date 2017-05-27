@@ -9,7 +9,6 @@
             </x-input>
         </group>
         <x-button plain type="primary" class="login_btn" @click.native="login">登录</x-button>
-        <router-link :to="{ name: 'home'}" style="text-align: center;color: #e1e1e1;cursor: pointer" tag="p">Back To Home</router-link>
     </div>
 </template>
 <script>

@@ -21,13 +21,16 @@ const actions = {
     login ({ commit }, params) {
         loginApi(params)
             .then(res => {
-                console.log(res.data)
                 commit(types.LOGIN_SUCCESS, res.data)
                 Vue.$vux.toast.show({
                     text: '登录成功',
                     type: 'default'
                 })
-                router.push({name: 'user'})
+                if (res.data.data.type) {
+                    router.push({name: 'admin'})
+                } else {
+                    router.push({name: 'user'})
+                }
             })
             .catch(err => {
                 console.log(err)
@@ -40,10 +43,10 @@ const actions = {
     register ({ commit }, params) {
         registerApi(params)
             .then(res => {
-                console.log(res.data)
                 commit(types.REGISTER_SUCCESS, res.data)
                 Vue.$vux.toast.show({
-                    text: '注册成功'
+                    text: '注册成功',
+                    type: 'default'
                 })
             })
             .catch(err => {
@@ -57,7 +60,6 @@ const actions = {
     getAllUser ({ commit }) {
         allUserApi()
             .then(res => {
-                console.log(res.data)
                 commit(types.GETALLUSER_SUCCESS, res.data)
             })
             .catch(err => {
@@ -67,7 +69,6 @@ const actions = {
     deleteUser ({ commit }, id) {
         deleteUserApi(id)
             .then(res => {
-                console.log(res.data)
                 Vue.$vux.toast.show({
                     text: '删除用户成功',
                     type: 'default'
@@ -86,20 +87,18 @@ const actions = {
 // mutations
 const mutations = {
     [types.LOGIN_SUCCESS] (state, data) {
-        window.sessionStorage.setItem('token', data.token)
-        state.userInfo = data
+        console.log(data)
+        window.sessionStorage.setItem('token', data.data.token)
+        state.userInfo = data.data
         state.authlock = true
-        // window.sessionStorage.setItem('token', JSON.stringify(state.userInfo.token))
-        console.log(state.userInfo.token, '带token')
-        console.log(data.token, '带token')
     },
     [types.REGISTER_SUCCESS] (state, data) {
         state.userInfo = data
         console.log(state.userInfo)
     },
     [types.GETALLUSER_SUCCESS] (state, data) {
-        state.allUser = data
-        console.log(state.allUser)
+        state.allUser = data.data
+        console.log(state.allUser, '所有用户')
     }
 }
 

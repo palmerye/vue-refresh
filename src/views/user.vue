@@ -2,12 +2,11 @@
     <div>
         <divider>我的收藏</divider>
         <div class="video-list">
-            <div v-for="item in items" class="video-item">
-                <router-link :to="{ name: 'videodetail', params: { id: item.id }}" class="title" tag="p">{{item.title}}</router-link>
-                <img :src="item.imgUrl">
+            <div v-for="item in allCollectVideo" class="video-item">
+                <router-link :to="{ name: 'videodetail', params: { id: item.video.vid }}" class="title" tag="p">{{item.video.name}}</router-link>
+                <img :src="item.video.photoUrl">
             </div>
         </div>
-        <router-link :to="{ name: 'home'}" style="text-align: center" tag="p">回到首页</router-link>
     </div>
 </template>
 <script>
@@ -17,29 +16,6 @@ import { mapState } from 'vuex'
 export default {
     data () {
         return {
-            show_pop: false,
-            items: [
-                {
-                    title: '视频标题',
-                    id: 1,
-                    imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
-                },
-                {
-                    title: '视频标题',
-                    id: 2,
-                    imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
-                },
-                {
-                    title: '视频标题',
-                    id: 1,
-                    imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
-                },
-                {
-                    title: '视频标题',
-                    id: 1,
-                    imgUrl: 'http://www.runoob.com/images/pulpit.jpg'
-                }
-            ]
         }
     },
     components: {
@@ -47,15 +23,11 @@ export default {
     },
     computed: {
         ...mapState({
-            userInfo: state => state.user.userInfo,
-            myjoinVote: state => state.vote.myjoinVoteinfo,
-            mypublishVote: state => state.vote.mypublishVoteinfo
+            allCollectVideo: state => state.video.allCollectVideo
         })
     },
     mounted () {
-        this.$store.dispatch('getUserInfo')
-        this.$store.dispatch('myjoinVote')
-        this.$store.dispatch('mypublishVote')
+        this.$store.dispatch('getallCollectVideo')
     },
     methods: {
         change (val) {

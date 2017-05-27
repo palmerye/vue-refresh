@@ -1,6 +1,6 @@
 <template>
     <div>
-        <search @on-submit="onSubmit" :auto-fixed="false" v-model="value2" @on-focus="onFocus" @on-cancel="onCancel"></search>
+        <search :auto-fixed="false" v-model="searchText" @on-change="onChange"></search>
         <div class="video-list">
             <div v-for="item in allVideo" class="video-item">
                 <router-link :to="{ name: 'videodetail', params: { id: item.vid }}" class="title" tag="p">{{item.name}}</router-link>
@@ -16,6 +16,7 @@ import { mapState } from 'vuex'
 export default {
     data () {
         return {
+            searchText: ''
         }
     },
     components: {
@@ -35,18 +36,8 @@ export default {
         // this.$store.dispatch('getinterestVote')
     },
     methods: {
-        click (key) {
-            this.tag_sec = key
-            if (key === '热门') {
-                this.$store.dispatch('gethotVote')
-                this.lists = this.hotVoteinfo
-                console.log(this.lists)
-            } else {
-                this.$store.dispatch('getinterestVote')
-                this.lists = this.interestVoteinfo
-                console.log(this.interestVoteinfo)
-                console.log(this.lists)
-            }
+        onChange (text) {
+            this.$store.dispatch('getallVideo', text)
         }
     }
 }

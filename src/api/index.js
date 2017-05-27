@@ -39,14 +39,17 @@ Vue.http.interceptors.push((request, next) => {
     // const accessToken = window.sessionStorage.getItem('token')
     // request.headers.set('Authorization', accessToken)
     // console.log(request.headers)
-    const auth = store.state.user.userInfo
+    const auth = store.state.user.authlock
     console.log(auth)
     if (auth) {
         const accessToken = window.sessionStorage.getItem('token')
         console.log(accessToken, 'token')
-        Vue.http.headers.Authorization = accessToken
+        // Vue.http.headers.Authorization = accessToken
+        // request.headers.set('Authorization', accessToken)
+        Vue.http.headers.common['Authorization'] = accessToken
         console.log(Vue.http.headers)
     } else {
+        console.log('删除头部')
         delete Vue.http.headers.Authorization
     }
   // if (auth.check()) {
@@ -77,8 +80,8 @@ export const deleteUserApi = (id) => {
 }
 
 // 视频相关
-export const allVideoApi = () => {
-    return Vue.http.get('http://7le.online/video?pageNo=1&pageSize=999')
+export const allVideoApi = (text) => {
+    return Vue.http.get('http://7le.online/video?pageNo=1&pageSize=999' + '&name=' + text)
 }
 export const detailVideoApi = (id) => {
     return Vue.http.get('http://7le.online/video/show/' + id)

@@ -6,7 +6,6 @@
             <video :src="detailVideo.videoUrl" class="video" controls="controls" autoplay></video>
             <x-button plain @click.native="collect(detailVideo.vid)">收藏</x-button>
         </div>
-        <router-link :to="{ name: 'home'}" style="text-align: center;color: #e1e1e1;cursor: pointer" tag="p">Back To Home</router-link>
     </div>
 </template>
 <script>
@@ -35,6 +34,7 @@ export default {
         collect (id) {
             if (this.authlock) {
                 console.log('已经登录')
+                this.$store.dispatch('toCollectVideo', this.$route.params.id)
             } else {
                 console.log('未登录')
                 this.$router.push({name: 'login'})
