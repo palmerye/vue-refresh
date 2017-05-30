@@ -73,7 +73,7 @@ export const registerApi = (params) => {
     return Vue.http.post('http://7le.online/register', params)
 }
 export const allUserApi = () => {
-    return Vue.http.get('http://7le.online/user')
+    return Vue.http.get('http://7le.online/user?pageNo=1&pageSize=999')
 }
 export const deleteUserApi = (id) => {
     return Vue.http.delete('http://7le.online/user/' + id)

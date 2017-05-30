@@ -3,7 +3,7 @@
         <divider>用户列表</divider>
         <div class="user-list">
             <div v-for="item in allUser" class="user-item">
-                <p><span>用户名： {{item.username}}</span><span>密码： {{item.password}}</span><x-button type="warn" mini plain class="delete" @click.native="del_op(item.uid)">删除用户</x-button></p>
+                <p><span>用户名： {{item.username}}</span><x-button type="warn" mini plain class="delete" @click.native="del_op(item.uid)">删除用户</x-button></p>
             </div>
             <divider>添加用户</divider>
             <group>
@@ -16,13 +16,20 @@
         </div>
         <divider>视频列表</divider>
         <div class="video-list">
-            <div v-for="item in allCollectVideo" class="video-item">
-                <router-link :to="{ name: 'videodetail', params: { id: item.video.vid }}" class="title" tag="p">{{item.video.name}}</router-link>
-                <img :src="item.video.photoUrl">
-                <x-button type="warn" mini plain class="delete" @click.native="del_col(item.video.vid)">删除收藏视频</x-button>
+            <div v-for="item in allVideo" class="video-item">
+                <router-link :to="{ name: 'videodetail', params: { id: item.vid }}" class="title" tag="p">{{item.name}}</router-link>
+                <img :src="item.photoUrl">
+                <x-button type="warn" mini plain class="delete" @click.native="del_video(item.vid)">删除视频</x-button>
             </div>
         </div>
         <divider>上传视频</divider>
+        <div>
+            <group>
+                <x-input title="视频名称" v-model="videoname"></x-input>
+            </group>
+            <input id="myUploader" type="file" multiple="multiple" name="file"/>
+            <x-button type="default" mini plain class="" @click.native="uploader">上传视频</x-button>
+        </div>
     </div>
 </template>
 <script>
@@ -33,7 +40,12 @@ export default {
     data () {
         return {
             username: '',
-            password: ''
+            password: '',
+            videoname: '',
+            newParams: {
+                name: '',
+                file: {}
+            }
         }
     },
     components: {
@@ -45,12 +57,12 @@ export default {
     computed: {
         ...mapState({
             allUser: state => state.user.allUser,
-            allCollectVideo: state => state.video.allCollectVideo
+            allVideo: state => state.video.allVideo
         })
     },
     mounted () {
         this.$store.dispatch('getAllUser')
-        this.$store.dispatch('getallCollectVideo')
+        this.$store.dispatch('getallVideo', '')
     },
     methods: {
         add_op () {
@@ -74,14 +86,23 @@ export default {
                 this.allUser = this.$store.state.user.allUser
             })
         },
-        del_col (id) {
-            this.$store.dispatch('deleteCollectVideo', id)
+        del_video (id) {
+            this.$store.dispatch('deleteVideo', id)
             .then(result => {
                 setTimeout(() => {
-                    this.$store.dispatch('getallCollectVideo')
+                    this.$store.dispatch('getallVideo', '')
                 }, 500)
-                this.allCollectVideo = this.$store.state.video.allCollectVideo
+                this.allVideo = this.$store.state.video.allVideo
             })
+        },
+        uploader () {
+            var zipFormData = new window.FormData()
+            var oFiles = document.querySelector('#myUploader').files
+            zipFormData.append('name', this.videoname)
+            zipFormData.append('file', oFiles[0])
+            console.log(zipFormData, '上传参数')
+            console.log(oFiles[0], '上传参数')
+            this.$store.dispatch('uploadVideo', zipFormData)
         }
     },
     watch: {

@@ -33,10 +33,17 @@ export default {
     },
     methods: {
         toJump () {
-            if (this.$store.state.user.userInfo.type) {
-                this.$router.push({name: 'admin'})
+            console.log(this.$store.state.user.authlock)
+            if (this.$store.state.user.authlock) {
+                console.log('已经登录')
+                if (this.$store.state.user.userInfo.type) {
+                    this.$router.push({name: 'admin'})
+                } else {
+                    this.$router.push({name: 'user'})
+                }
             } else {
-                this.$router.push({name: 'user'})
+                console.log('未登录')
+                this.$router.push({name: 'login'})
             }
         }
     }
@@ -44,7 +51,10 @@ export default {
 </script>
 <style lang="less">
 @import '~vux/src/styles/reset.less';
-
+body {
+    background: linear-gradient(to right, #c8f2e6 3%, #fff 0);
+    background-size: 30px 100%;
+}
 .iconHome_1 {
 	font-size: 30px !important;
 }

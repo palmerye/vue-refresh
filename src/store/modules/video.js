@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { allVideoApi, detailVideoApi, collectVideoApi, deleteCollectVideoApi, toCollectVideoApi, deleteVideoApi } from '../../api'
+import { allVideoApi, detailVideoApi, collectVideoApi, deleteCollectVideoApi, toCollectVideoApi, deleteVideoApi, uploadVideoApi } from '../../api'
 import * as types from '../mutation-types'
 
 const state = {
@@ -91,6 +91,23 @@ const actions = {
                 console.log(err)
                 Vue.$vux.toast.show({
                     text: '删除视频失败',
+                    type: 'warn'
+                })
+            })
+    },
+    uploadVideo ({ commit }, file) {
+        console.log(file)
+        uploadVideoApi(file)
+            .then(res => {
+                Vue.$vux.toast.show({
+                    text: '上传视频成功',
+                    type: 'default'
+                })
+            })
+            .catch(err => {
+                console.log(err)
+                Vue.$vux.toast.show({
+                    text: '上传视频失败',
                     type: 'warn'
                 })
             })

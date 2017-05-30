@@ -5,12 +5,13 @@
             <div v-for="item in allCollectVideo" class="video-item">
                 <router-link :to="{ name: 'videodetail', params: { id: item.video.vid }}" class="title" tag="p">{{item.video.name}}</router-link>
                 <img :src="item.video.photoUrl">
+                <x-button type="warn" mini plain class="delete" @click.native="del_col(item.video.vid)">删除收藏视频</x-button>
             </div>
         </div>
     </div>
 </template>
 <script>
-import { Divider } from 'vux'
+import { Divider, XButton } from 'vux'
 import { mapState } from 'vuex'
 
 export default {
@@ -19,7 +20,8 @@ export default {
         }
     },
     components: {
-        Divider
+        Divider,
+        XButton
     },
     computed: {
         ...mapState({
@@ -30,14 +32,13 @@ export default {
         this.$store.dispatch('getallCollectVideo')
     },
     methods: {
-        change (val) {
-        },
-        addTag () {
-            this.$store.dispatch('addTag', {
-                interested: this.sel_tag.toString()
-            })
+        del_col (id) {
+            this.$store.dispatch('deleteCollectVideo', id)
             .then(result => {
-                this.show_pop = false
+                setTimeout(() => {
+                    this.$store.dispatch('getallCollectVideo')
+                }, 500)
+                this.allCollectVideo = this.$store.state.video.allCollectVideo
             })
         }
     },
