@@ -70,15 +70,37 @@ body {
 	padding: 30px;
 }
 .header {
+    z-index: 888;
     display: flex;
-    margin-bottom: 10px;
     justify-content: space-between;
     color: #666;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff url("assets/imgages/bg-fuck.png") no-repeat fixed top;
+    background-size: cover;
+    span {
+        margin: 10px 30px;
+        color: #fff;
+        box-shadow: 0 2px 2px #e1e1e1;
+        border: 1px solid #fff;
+        border-radius: 5px;
+        padding: 3px;
+        cursor: pointer;
+        &:hover {
+            opacity: 0.6;
+        }
+    }
 }
 @media screen and (min-width: 450px) {
     .content_all {
         max-width: 1000px;
         margin: 0 auto;
+    }
+    .header {
+        top: 0;
+        bottom: auto;
     }
 }
 </style>

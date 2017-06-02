@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="login-div">
         <group>
             <x-input placeholder="输入用户名..." v-model="params.username">
                 <i slot="label" class="iconfont icon-people"></i>
@@ -53,6 +53,17 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
+.login-div {
+    z-index: 999;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 100px 50px;
+    background: #fff url("../assets/imgages/bg-login.jpg") no-repeat top;
+    background-size:100% 100%; 
+}
 .login_btn {
     margin: 20px auto;
     border-radius: 0;

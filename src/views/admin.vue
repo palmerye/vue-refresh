@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="admin-div">
         <divider>用户列表</divider>
         <div class="user-list">
             <div v-for="item in allUser" class="user-item">
@@ -113,6 +113,9 @@ export default {
 }
 </script>
 <style lang='scss' scoped>
+.admin-div {
+    margin-top: 50px;
+}
 .user-list {
     .user-item {
         position: relative;
